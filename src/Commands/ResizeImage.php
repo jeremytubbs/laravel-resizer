@@ -14,6 +14,7 @@ class ResizeImage extends Job implements SelfHandling, ShouldQueue
 
     protected $image;
     protected $filename;
+    protected $config;
 
     /**
      * Create a new command instance.
