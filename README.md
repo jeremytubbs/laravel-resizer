@@ -21,7 +21,7 @@ The artisan command is queued and will use the `default` queue driver set in the
 If you would like to use the `ResizeImage` command inside a controller add the trait and dispatch the command:
 
 ```php
-use Jeremytubbs\LaravelResizer\Commands\ResizeImages;
+use Jeremytubbs\LaravelResizer\Commands\ResizeImage;
 
 class MyController extends Controller
 {
