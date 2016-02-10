@@ -27,8 +27,8 @@ class MyController extends Controller
 {
     use \Illuminate\Foundation\Bus\DispatchesJobs;
 
-	public function resizeImage($image, $filename = null) {
-		$command = new ResizeImage($image, $filename);
+	public function resizeImage($image_path, $destination_path = null, $rename = null) {
+		$command = new ResizeImage($image_path, $destination_path, $rename);
 		$this->dispatch($command);
 	}
 }

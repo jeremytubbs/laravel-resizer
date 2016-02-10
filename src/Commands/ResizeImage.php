@@ -12,8 +12,8 @@ class ResizeImage extends Job implements SelfHandling, ShouldQueue
 {
     use InteractsWithQueue;
 
-    protected $image;
-    protected $filename;
+    protected $image_path;
+    protected $destination_path;
     protected $config;
 
     /**
@@ -21,10 +21,11 @@ class ResizeImage extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function __construct($image, $filename = null, $config = null)
+    public function __construct($image_path, $destination_path = null, $rename = null, $config = null)
     {
-        $this->image = $image;
-        $this->filename = $filename;
+        $this->image_path = $image_path;
+        $this->destination_path = $destination_path;
+        $this->rename = $rename;
         $this->setResizer($config);
     }
 
@@ -35,7 +36,7 @@ class ResizeImage extends Job implements SelfHandling, ShouldQueue
      */
     public function handle()
     {
-        $this->resizer->makeImages($this->image, $this->filename);
+        $this->resizer->makeImages($this->image_path, $this->destination_path, $this->rename);
     }
 
     public function setResizer($config)

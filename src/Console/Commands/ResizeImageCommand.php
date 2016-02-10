@@ -16,8 +16,9 @@ class ResizeImageCommand extends Command
      */
     protected $signature = 'resize:image
         {image? : Image that will be tiled.}
-        {--filename=null : Optional filename for output.}
-        {--source_path=null : Optional image source path, default is public/images.}';
+        {--destination=null : Optional destination directory path.}
+        {--source_path=null : Optional image source path, default is public/images.}
+        {--rename=null : Optional filename for output.}';
 
     /**
      * The console command description.
@@ -43,8 +44,9 @@ class ResizeImageCommand extends Command
      */
     public function handle()
     {
+        $destination_path = $this->option('destination') == 'null' ? null : $this->option('destination');
         $source_path = $this->option('source_path') == 'null' ? public_path('images') : $this->option('source_path');
-        $filename = $this->option('filename') == 'null' ? null : $this->option('filename');
+        $rename = $this->option('rename') == 'null' ? null : $this->option('rename');
         $image_path = $source_path . '/' . $this->argument('image');
 
         // check if path is valid
@@ -69,7 +71,7 @@ class ResizeImageCommand extends Command
             }
         }
 
-        $command = new ResizeImage($image_path, $filename);
+        $command = new ResizeImage($image_path, $destination_path, $rename);
         $this->dispatch($command);
     }
 }
