@@ -27,6 +27,6 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "jeremytubbs/resizer": "^0.1.0"
+        "jeremytubbs/resizer": "^0.1"
     }
 }

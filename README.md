@@ -10,10 +10,10 @@ Artisan command to queue image resizing:
 php artisan resize:image
 ```
 
-The artisan command accepts an image argument and an optional filename and source_path. If no image argument is provided you will recieve a prompt to enter an image name. The image path defaults to the public/images directory.
+The artisan command accepts an image argument and an optional rename, source_path and destinataion argument. If no image argument is provided you will recieve a prompt to enter an image name. The `--source_path` and `--destiination` arguments default to the `public/images` directory. The `--destination` path appends to the `image_path` set in your `config\resizer.php` to create a directory structure for your resized images.
 
 ```sh
-php artisan resize:image KISS.jpg --filename=keep-it-simple --source_path=posts
+php artisan resize:image KISS.jpg --rename=keep-it-simple --source_path=resources/assets --destinataion=posts/kiss
 ```
 
 The artisan command is queued and will use the `default` queue driver set in the `queue.php` config file.
