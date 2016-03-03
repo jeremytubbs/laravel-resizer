@@ -4,6 +4,18 @@ Laravel Resizer
 Artisan command to resize and create high-resolution images for use with picturefill / scrset.
 This package utilizes my image resizer package: https://github.com/jeremytubbs/resizer
 
+### Setup
+Add service provider to `app/config`:
+
+```php
+Jeremytubbs\LaravelResizer\ResizerServiceProvider::class,
+````
+
+Publish the `resizer.php` config file and the `picturefill.min.js` file:
+```sh
+php artisan vendor:publish
+```
+
 ### Usage
 Artisan command to queue image resizing:
 ```sh
@@ -27,21 +39,32 @@ class MyController extends Controller
 {
     use \Illuminate\Foundation\Bus\DispatchesJobs;
 
-	public function resizeImage($image_path, $destination_path = null, $rename = null) {
-		$command = new ResizeImage($image_path, $destination_path, $rename);
-		$this->dispatch($command);
-	}
+    public function resizeImage($image_path, $destination_path = null, $rename = null) {
+        $command = new ResizeImage($image_path, $destination_path, $rename);
+        $this->dispatch($command);
+    }
 }
 ```
 
-### Setup
-Add service provider to `app/config`:
-
-```php
-Jeremytubbs\LaravelResizer\ResizerServiceProvider::class,
-````
-
-Publish the `resizer.php` config file:
-```sh
-php artisan vendor:publish
+The package makes two custom blade directives available:
+```html
+<head>
+    @picturefill
+</head>
+<body>
+    @srcset('/images/path/source.jpg')
+</body>
+```
+will result in:
+```html
+<head>
+    <script>
+        // Picture element HTML5 shiv
+        document.createElement( "picture" );
+    </script>
+    <script src="/vendor/laravel-resizer/picturefill.min.js" async></script>
+</head>
+<body>
+    <img srcset="/images/path/source.jpg 1x, images/path/source@2x.jpg 2x">
+</body>
 ```
