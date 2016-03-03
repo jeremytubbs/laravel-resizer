@@ -42,7 +42,7 @@ class ResizeImage extends Job implements SelfHandling, ShouldQueue
     public function setResizer($config)
     {
         $this->resizer = ResizeFactory::create([
-            'path'    => isset($config['image_path']) ? $config['image_path'] : config('resizer.image_path'),
+            'path'    => isset($config['destination_path']) ? $config['destination_path'] : config('resizer.destination_path'),
             'driver'  => isset($config['image_driver']) ? $config['image_driver'] : config('resizer.image_driver'),
             'format'  => isset($config['image_format']) ? $config['image_format'] : config('resizer.image_format'),
             'sizes'   => isset($config['image_sizes']) ? $config['image_sizes'] : config('resizer.image_sizes'),

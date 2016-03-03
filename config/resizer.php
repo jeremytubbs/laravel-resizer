@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'image_path' => public_path('images'),
+    'destination_path' => public_path('images'),
     'image_sizes' => [
         'thumb'   => [165, null],
         'preview' => [360, 420]
